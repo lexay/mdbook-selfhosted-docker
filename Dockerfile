@@ -13,9 +13,9 @@ RUN cargo install mdbook
 
 FROM alpine
 
-#RUN adduser -D deploy
-#USER deploy
-#WORKDIR /home/deploy/book
-USER nobody
+RUN adduser -D deploy
+USER deploy
+COPY --chown=deploy ./book/ /home/deploy/book/
+WORKDIR /home/deploy/book/
 
 COPY --from=dependancies /usr/local/cargo/bin/mdbook /usr/bin/
