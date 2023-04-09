@@ -1,2 +1,4 @@
 book/book
 .env
+ssl/*
+conf.d/*
