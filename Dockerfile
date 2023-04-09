@@ -19,3 +19,5 @@ RUN adduser -D deploy
 USER deploy
 COPY --chown=deploy ./book/ /home/deploy/book/
 WORKDIR /home/deploy/book/
+RUN mkdir ./output/
+RUN ["mdbook", "build", "-d", "./output/"]
