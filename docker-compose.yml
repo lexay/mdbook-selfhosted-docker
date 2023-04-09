@@ -3,18 +3,22 @@ services:
   builder:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: builder.Dockerfile
     container_name: 'book-builder'
     volumes:
       - static:/book/output/:/book/
     command: ["mdbook", "build", "-d", "./output/"]
 
   web-server:
-    image: nginx:stable-alpine3.17
+    build:
+      context: .
+      dockerfile: web-server.Dockerfile
+    container_name: 'book-server'
     volumes:
       - static:/usr/share/nginx/html/
     ports:
       - "${IP}:80:80"
+      - "${IP}:443:443"
     restart: always
 
 volumes:
