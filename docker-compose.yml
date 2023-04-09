@@ -14,6 +14,7 @@ services:
       - static:/usr/share/nginx/html/
     ports:
       - "${IP}:80:80"
+    restart: always
 
 volumes:
   static:
