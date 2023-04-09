@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
     container_name: 'book-builder'
     volumes:
-      - static:/home/deploy/book/output/:/book/
+      - static:/book/output/:/book/
     command: ["mdbook", "build", "-d", "./output/"]
 
   web-server:
