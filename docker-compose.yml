@@ -1,14 +1,19 @@
 version: "3"
 services:
-  server:
+  builder:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: 'book'
+    container_name: 'book-builder'
+    volumes:
+      - static:/home/deploy/book/output/:/book/
 
+  web-server:
+    image: nginx:stable-alpine3.17
+    volumes:
+      - static:/usr/share/nginx/html/
     ports:
-      - "${IP}:3001"
+      - "${IP}:80:80"
 
-    restart: always
-
-    command: ["mdbook", "serve", "-n", "0.0.0.0", "-p", "3001"]
+volumes:
+  static:
