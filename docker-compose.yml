@@ -17,10 +17,10 @@ services:
     volumes:
       - static:/usr/share/nginx/html/
     ports:
-      - "${HOST}:80:80"
-      - "${HOST}:443:443"
+      - "${HOST_IP}:80:80"
+      - "${HOST_IP}:443:443"
     environment:
-      - NGINX_HOST=${HOST}
+      - NGINX_HOST=${HOST_NAME}
     restart: always
 
 volumes:
