@@ -2,4 +2,3 @@ book/book
 .env
 ssl/*
 !ssl/.keep
-conf.d/default.conf
