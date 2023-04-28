@@ -17,4 +17,3 @@ COPY --from=dependancies /usr/local/cargo/bin/mdbook /usr/bin/
 
 COPY ./book/ /book/
 WORKDIR /book/
-RUN mkdir ./output/

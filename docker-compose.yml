@@ -6,8 +6,12 @@ services:
       dockerfile: builder.Dockerfile
     container_name: 'book-builder'
     volumes:
-      - static:/book/output/:/book/
-    command: ["mdbook", "build", "-d", "./output/"]
+      - ./book/:/book/src/
+      - input:/book/input/
+      - output:/book/output/
+    command: >
+      sh -c "cp -r /book/src/* /book/input/ &&
+            mdbook build /book/input/ -d /book/output/"
 
   web-server:
     build:
@@ -15,7 +19,7 @@ services:
       dockerfile: web-server.Dockerfile
     container_name: 'book-server'
     volumes:
-      - static:/usr/share/nginx/html/
+      - output:/usr/share/nginx/html/
     ports:
       - "${HOST_IP}:80:80"
       - "${HOST_IP}:443:443"
@@ -24,4 +28,5 @@ services:
     restart: always
 
 volumes:
-  static:
+  input:
+  output:
