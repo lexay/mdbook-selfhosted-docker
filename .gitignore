@@ -1,4 +1,5 @@
-book/book
 .env
+book/*
+!book/.gitkeep
 ssl/*
-!ssl/.keep
+!ssl/.gitkeep
