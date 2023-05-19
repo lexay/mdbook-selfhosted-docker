@@ -10,7 +10,7 @@ services:
       - input:/book/input/
       - output:/book/output/
     command: >
-      sh -c "cp -r /book/src/* /book/input/ &&
+      sh -c "cp -Lru /book/src/* /book/input/ &&
             mdbook build /book/input/ -d /book/output/"
 
   web-server:
