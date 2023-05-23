@@ -14,6 +14,3 @@ RUN cargo install mdbook
 FROM alpine
 
 COPY --from=dependancies /usr/local/cargo/bin/mdbook /usr/bin/
-
-RUN mkdir book
-WORKDIR /book/
