@@ -13,7 +13,12 @@ the `ssl` directory.
 
 ### Knowledge base source
 
-Copy or clone it to the `book` directory.
+Copy everything from the root directory of the knowledge base or clone it to the
+`book` directory.
+
+```bash
+$ git clone <kb_source> book/
+```
 
 ### Environment variables
 Host IP and name can be the same if you serve it on a local machine and do not
