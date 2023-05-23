@@ -6,10 +6,14 @@ from markdown into HTML files and served as static html content with NGINX.
 
 ### SSL Certificates
 
-For SSL to work properly you should generate selfsigned certificates, this
-[detailed guide][2] can help you out. Put the generated key and corresponding
-certificate named `<domain_name>.key` and `<domain_name>.crt` respectively to
-the `ssl` directory.
+For SSL to work properly you should obtain a key and certificate:
+* from `certbot`.
+* or create them yourself, this [detailed guide][2] can help you out. In this
+    case you should add the generated certificate manually to every device, you
+    are going to visit your web-server from.
+
+Put the generated key and corresponding certificate named `<domain_name>.key`
+and `<domain_name>.crt` respectively to the `ssl` directory.
 
 ### Knowledge base source
 
