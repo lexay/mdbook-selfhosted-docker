@@ -15,5 +15,5 @@ FROM alpine
 
 COPY --from=dependancies /usr/local/cargo/bin/mdbook /usr/bin/
 
-COPY ./book/ /book/
+RUN mkdir book
 WORKDIR /book/
