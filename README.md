@@ -35,9 +35,54 @@ HOST_IP=''
 HOST_NAME=''
 ```
 
-### How to automate on knowledge base source change
+### How to automate updates of knowledge base on server
+
+Every time you make changes to your knowledge base, it should be recompiled by
+the `mdbook` tool into HTML again to reflect those changes on your server.
+
+Do you need this? Of course not, if you work on you knowledge base from time to
+time. You just recompile manually.
+
+I do frequent edits and updates to my KB, so some automation wont hurt. :-)
 
 
+#### VCS based approach
+
+If your knowledge base is tracked by VCS like Git, one of the easy solutions
+to that would be a cron-job scheduled to run `git pull` every <n> minutes.
+
+```bash
+$ crontab -e
+```
+
+```crontab
+*/<minutes> * * * * <path_to_script>
+```
+
+The script itself could look like this:
+
+```bash
+#!/usr/bin/env bash
+
+KB_SOURCE_GIT_REPO=<path_to_kb_source_repo>
+COMPOSE_FILE=<path_to_docker_compose_file>
+
+cd $KB_SOURCE_GIT_REPO
+
+if [[ $(git pull) != "Already up to date." ]]; then
+    docker compose --file $COMPOSE_FILE restart builder
+fi
+```
+
+This solves 2 problems:
+
+a. You dont need to `git pull` changes manually.
+
+b. mdbook recompiles source of your knowledge base on the fly, you dont even
+need to restart the server.
+
+Note: When the repo is up to date, make sure no additional info, like some help
+message, pops up when you `git-pull`.
 
 [1]: https://github.com/rust-lang/mdBook
 [2]: https://github.com/ChristianLempa/cheat-sheets/blob/main/misc/ssl-certs.md
