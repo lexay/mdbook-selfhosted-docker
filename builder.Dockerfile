@@ -2,12 +2,7 @@ FROM rust:alpine3.17 AS base
 
 FROM base AS dependancies
 
-RUN apk update && apk add --no-cache \
-  build-base \
-  musl \
-  perl \
-  gcc
-
+RUN apk update && apk add --no-cache build-base
 
 RUN cargo install mdbook
 
