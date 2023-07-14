@@ -46,10 +46,13 @@ time. You just recompile manually.
 I do frequent edits and updates to my KB, so some automation wont hurt. :-)
 
 
-#### VCS based approach
+#### Git based approach
 
-If your knowledge base is tracked by VCS like Git, one of the easy solutions
-to that would be a cron-job scheduled to run `git pull` every <n> minutes.
+If your knowledge base source is tracked by Git, one of the easy solutions to
+that would be a cron-job scheduled to run `git pull` every *n* minutes and run
+git `post-merge` hook after the changes have been successfully merged.
+
+1. Create a cron job
 
 ```bash
 $ crontab -e
@@ -59,19 +62,24 @@ $ crontab -e
 */<minutes> * * * * <path_to_script>
 ```
 
-The script itself could look like this:
+and the the cron job script.
 
 ```bash
+# .local/share/scripts
 #!/usr/bin/env bash
 
-KB_SOURCE_GIT_REPO=<path_to_kb_source_repo>
-COMPOSE_FILE=<path_to_docker_compose_file>
-
+KB_SOURCE_GIT_REPO='<path_to_kb_source_repo>'
 cd $KB_SOURCE_GIT_REPO
+git pull
+```
 
-if [[ $(git pull) != "Already up to date." ]]; then
-    docker compose --file $COMPOSE_FILE restart builder
-fi
+2. Create a `post-merge` hook in the knowledge base source repository.
+
+```bash
+# book/.git/hooks/post-merge
+#!/usr/bin/env bash
+COMPOSE_FILE='<path_to_docker_compose_file>'
+docker compose --file $COMPOSE_FILE restart builder
 ```
 
 This solves 2 problems:
@@ -80,9 +88,6 @@ a. You dont need to `git pull` changes manually.
 
 b. mdbook recompiles source of your knowledge base on the fly, you dont even
 need to restart the server.
-
-Note: When the repo is up to date, make sure no additional info, like some help
-message, pops up when you `git-pull`.
 
 [1]: https://github.com/rust-lang/mdBook
 [2]: https://github.com/ChristianLempa/cheat-sheets/blob/main/misc/ssl-certs.md
