@@ -66,8 +66,8 @@ and the the cron job script.
 
 ```bash
 # .local/share/scripts
-#!/usr/bin/env bash
 
+#!/usr/bin/env bash
 KB_SOURCE_GIT_REPO='<path_to_kb_source_repo>'
 cd $KB_SOURCE_GIT_REPO
 git pull
@@ -77,6 +77,7 @@ git pull
 
 ```bash
 # book/.git/hooks/post-merge
+
 #!/usr/bin/env bash
 COMPOSE_FILE='<path_to_docker_compose_file>'
 docker compose --file $COMPOSE_FILE restart builder
