@@ -65,7 +65,7 @@ $ crontab -e
 and the the cron job script.
 
 ```bash
-# .local/share/scripts
+# ~/.local/share/scripts
 
 #!/usr/bin/env bash
 KB_SOURCE_GIT_REPO='<path_to_kb_source_repo>'
@@ -76,7 +76,7 @@ git pull
 2. Create a `post-merge` hook in the knowledge base source repository.
 
 ```bash
-# book/.git/hooks/post-merge
+# ./book/.git/hooks/post-merge
 
 #!/usr/bin/env bash
 COMPOSE_FILE='<path_to_docker_compose_file>'
