@@ -6,13 +6,10 @@ services:
       dockerfile: builder.Dockerfile
     container_name: 'book-builder'
     volumes:
-      - ./book/:/book/src/
-      - input:/book/input/
+      - ./book/:/book/input/
       - output:/book/output/
     command: >
-      sh -c "rm -fr /book/input/* &&
-        cp -r /book/src/* /book/input/ &&
-        mdbook build /book/input/ -d /book/output/"
+      sh -c "mdbook build /book/input/ -d /book/output/"
 
   web-server:
     build:
