@@ -26,5 +26,4 @@ services:
     restart: always
 
 volumes:
-  input:
   output:
