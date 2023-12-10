@@ -80,7 +80,7 @@ git pull
 
 #!/usr/bin/env bash
 COMPOSE_FILE='<path_to_docker_compose_file>'
-docker compose --file $COMPOSE_FILE restart builder
+docker compose --file $COMPOSE_FILE up --no-deps builder
 ```
 
 This solves 2 problems:
